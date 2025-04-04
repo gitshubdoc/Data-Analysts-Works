@@ -21,7 +21,7 @@ app.post('/create-payment', async (req, res) => {
             },
         }, {
             headers: {
-                Authorization: `Bearer ${process.env.FLUTTERWAVE_SECRET_KEY}`,
+                Authorization: `Bearer ${process.env.FLUTTERWAVE_SECRET_KEY}`, // Fixed to use the environment variable
             },
         });
 
