@@ -21,7 +21,7 @@ app.post('/create-payment', async (req, res) => {
             },
         }, {
             headers: {
-                Authorization: `Bearer ${process.env.FLWSECK_TEST-f6ef3bd7a7019f235aa556bbae39889e-X}`,
+                Authorization: `Bearer ${process.env.FLUTTERWAVE_SECRET_KEY}`,
             },
         });
 
