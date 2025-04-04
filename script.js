@@ -25,43 +25,31 @@ card.addEventListener('change', (event) => {
 
 document.getElementById('applicationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const submitButton = document.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.innerHTML = '<span class="mr-2">Processing...</span><span class="spinner"></span>';
 
-    const { paymentIntent, error } = await stripe.confirmCardPayment(
-        await getClientSecret(), {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    name: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value
-                }
-            }
-        }
-    );
-
-    if (error) {
-        document.getElementById('card-errors').textContent = error.message;
-        submitButton.disabled = false;
-        submitButton.textContent = 'Pay $5 & Submit Application';
-    } else if (paymentIntent.status === 'succeeded') {
-        window.location.href = 'success.html';
-    }
-});
-
-async function getClientSecret() {
-    const response = await fetch('http://localhost:4242/create-payment-intent', {
+    const response = await fetch('http://localhost:4242/create-payment', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            amount: 1000,
-            currency: 'usd'
+            amount: 5,
+            currency: 'USD',
+            email: document.getElementById('email').value,
+            name: document.getElementById('fullName').value,
         }),
     });
-    const { clientSecret } = await response.json();
-    return clientSecret;
-}
+
+    const { paymentLink } = await response.json();
+
+    if (paymentLink) {
+        window.location.href = paymentLink;
+    } else {
+        document.getElementById('card-errors').textContent = 'Failed to initiate payment.';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Pay $5 & Submit Application';
+    }
+});

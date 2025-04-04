@@ -1,25 +1,32 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const axios = require('axios');
 
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 
-app.post('/create-payment-intent', async (req, res) => {
+app.post('/create-payment', async (req, res) => {
     try {
-        const paymentIntent = await stripe.paymentIntents.create({
+        const response = await axios.post('https://api.flutterwave.com/v3/payments', {
+            tx_ref: `tx-${Date.now()}`,
             amount: req.body.amount,
             currency: req.body.currency,
-            automatic_payment_methods: {
-                enabled: true,
+            redirect_url: 'http://localhost:3000/success.html',
+            customer: {
+                email: req.body.email,
+                name: req.body.name,
+            },
+        }, {
+            headers: {
+                Authorization: `Bearer ${process.env.FLWSECK_TEST-f6ef3bd7a7019f235aa556bbae39889e-X}`,
             },
         });
 
         res.json({
-            clientSecret: paymentIntent.client_secret
+            paymentLink: response.data.data.link,
         });
     } catch (err) {
         res.status(500).json({ error: err.message });
