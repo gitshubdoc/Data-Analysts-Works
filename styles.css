@@ -17,12 +17,6 @@ body {
     padding: 45px;
 }
 
-@media (max-width: 767px) {
-    .markdown-body {
-        padding: 15px;
-    }
-}
-
 .Box {
     background-color: white;
     border: 1px solid #e1e4e8;
@@ -56,16 +50,21 @@ body {
     text-decoration: underline;
 }
 
-.footer ul {
-    padding: 0;
-    margin: 0;
+.text-red {
+    color: #cf222e;
 }
 
-.footer li {
+.spinner {
     display: inline-block;
-    margin: 0 1px;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.75s linear infinite;
 }
 
-.octicon-mark-github {
-    vertical-align: text-bottom;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
+
